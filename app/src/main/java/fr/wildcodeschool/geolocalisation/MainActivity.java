@@ -18,12 +18,13 @@ public class MainActivity extends AppCompatActivity {
 
     LocationManager mLocationManager = null;
     public static final int MY_PERMISSION_REQUEST_ACCES_FINE_LOCATION = 100;
+    LocationListener locationListener;
 
     @SuppressLint("MissingPermission")
     private void initLocation(){
         mLocationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
-        LocationListener locationListener = new LocationListener() {
+        locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
                 Toast.makeText(getApplicationContext(), location.toString(), Toast.LENGTH_LONG).show();
@@ -56,6 +57,20 @@ public class MainActivity extends AppCompatActivity {
 
         checkPermission();
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        mLocationManager.removeUpdates(locationListener);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        initLocation();
     }
 
     private void checkPermission(){
