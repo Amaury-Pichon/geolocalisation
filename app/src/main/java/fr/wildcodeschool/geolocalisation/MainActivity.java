@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                Toast.makeText(getApplicationContext(), "Miou ! " + location.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), location.toString(), Toast.LENGTH_LONG).show();
             }
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
